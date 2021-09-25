@@ -1,6 +1,6 @@
 /*
-Plugin Name
-Copyright (C) <Year> <Developer> <Email Address>
+OBS Render Lag Plugin
+Copyright (C) 2021 Norihiro Kamae <norihiro@nagater.net>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,13 +23,16 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
 
+extern struct obs_source_info rendering_lag_info;
+
 bool obs_module_load(void)
 {
-    blog(LOG_INFO, "plugin loaded successfully (version %s)", PLUGIN_VERSION);
-    return true;
+	blog(LOG_INFO, "plugin loaded successfully (version %s)", PLUGIN_VERSION);
+	obs_register_source(&rendering_lag_info);
+	return true;
 }
 
 void obs_module_unload()
 {
-    blog(LOG_INFO, "plugin unloaded");
+	blog(LOG_INFO, "plugin unloaded");
 }

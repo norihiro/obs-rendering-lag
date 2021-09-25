@@ -2,25 +2,25 @@ cmake_minimum_required(VERSION 3.10)
 
 # Change obs-plugintemplate to your plugin's name in a machine-readable format
 # (e.g.: obs-myawesomeplugin) and set 
-project(obs-plugintemplate)
-set(CMAKE_PROJECT_VERSION 1.0.0) # TODO: update cmake to 3.12 or later and put to 'project'
+project(obs-rendering-lag)
+set(CMAKE_PROJECT_VERSION 0.1.0) # TODO: update cmake to 3.12 or later and put to 'project'
 
 # Replace `Your Name Here` with the name (yours or your organization's) you want
 # to see as the author of the plugin (in the plugin's metadata itself and in the installers)
-set(PLUGIN_AUTHOR "Your Name Here")
+set(PLUGIN_AUTHOR "Norihiro Kamae")
 
 # Replace `com.example.obs-plugin-template` with a unique Bundle ID for macOS releases
 # (used both in the installer and when submitting the installer for notarization)
-set(MACOS_BUNDLEID "com.example.obs-plugintemplate")
+set(MACOS_BUNDLEID "net.nagater.obs-rendering-lag")
 
 # Replace `me@contoso.com` with the maintainer email address you want to put in Linux packages
-set(LINUX_MAINTAINER_EMAIL "me@contoso.com")
+set(LINUX_MAINTAINER_EMAIL "norihiro@nagater.net")
 
 # TAKE NOTE: No need to edit things past this point
 
 set(CMAKE_PREFIX_PATH "${QTDIR}")
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC OFF)
+set(CMAKE_AUTOUIC OFF)
 
 # In case you need C++
 set(CMAKE_CXX_STANDARD 11)
@@ -53,6 +53,7 @@ configure_file(
 
 set(PLUGIN_SOURCES
 	src/plugin-main.c
+	src/rendering-lag.c
 )
 
 set(PLUGIN_HEADERS
