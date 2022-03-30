@@ -54,7 +54,7 @@ static void rendering_lag_update(void *data, obs_data_t *settings)
 	struct rendering_lag *s = data;
 
 	s->rate = obs_data_get_double(settings, "rate") * 1e-2;
-	s->sleep_time = obs_data_get_double(settings, "sleep_time");
+	s->sleep_time = obs_data_get_int(settings, "sleep_time");
 }
 
 static void *rendering_lag_create(obs_data_t *settings, obs_source_t *source)
