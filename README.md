@@ -10,5 +10,4 @@ This plugin is intentionally add lags during video rendering.
   This property specifies how often the lag is injected.
 - Sleep time:
   This property specifies how long the lag is injected for each.
-  If the sleep time is same as your frame time (inverse of the frame rate), OBS Studio tries to avoid rendering lag.
-  It is recommended to set around 1.5x of your frame time.
+  It is recommended to set a slightly larger value than twice of the frame time, for example, 70 ms for 30 fps.

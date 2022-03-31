@@ -1,6 +1,7 @@
 #include <obs-module.h>
 #include <obs.h>
 #include <util/platform.h>
+#include <util/dstr.h>
 #include <stdlib.h>
 #include "plugin-macros.generated.h"
 
@@ -32,6 +33,15 @@ static obs_properties_t *rendering_lag_get_properties(void *unused)
 	obs_property_float_set_suffix(prop, "%");
 	prop = obs_properties_add_int_slider(props, "sleep_time", obs_module_text("Sleep time"), 1, 100, 1);
 	obs_property_int_set_suffix(prop, "ms");
+	struct obs_video_info ovi;
+	obs_get_video_info(&ovi);
+	if (ovi.fps_den>0 && ovi.fps_num>0) {
+		struct dstr desc;
+		dstr_init(&desc);
+		dstr_printf(&desc, obs_module_text("sleep_time.tooltip"), ovi.fps_den * 2.1e3 / ovi.fps_num);
+		obs_property_set_long_description(prop, desc.array);
+		dstr_free(&desc);
+	}
 
 	return props;
 }
@@ -39,7 +49,7 @@ static obs_properties_t *rendering_lag_get_properties(void *unused)
 static void rendering_lag_get_defaults(obs_data_t *settings)
 {
 	obs_data_set_default_double(settings, "rate", 5.0);
-	obs_data_set_default_int(settings, "sleep_time", 45);
+	obs_data_set_default_int(settings, "sleep_time", 70);
 }
 
 static void rendering_lag_destroy(void *data)
@@ -71,21 +81,16 @@ static void rendering_lag_tick(void *data, float sec)
 	struct rendering_lag *s = data;
 
 	s->sleep_to = 0;
-	if (rand() < s->rate * RAND_MAX) {
-		struct obs_video_info ovi;
-		obs_get_video_info(&ovi);
-		if (ovi.fps_den>0 && ovi.fps_num>0)
-			s->sleep_to = os_gettime_ns() + 1000000LL * s->sleep_time;
-	}
+	if (rand() < s->rate * RAND_MAX)
+		s->sleep_to = obs_get_video_frame_time() + 1000000LL * s->sleep_time;
 }
 
 static void rendering_lag_render(void *data, gs_effect_t *effect)
 {
 	struct rendering_lag *s = data;
-	if (s->sleep_to)
+	if (s->sleep_to) {
 		os_sleepto_ns(s->sleep_to);
-	if (rand() < s->rate * RAND_MAX) {
-		os_sleep_ms(s->sleep_time);
+		s->sleep_to = 0;
 	}
 }
 
