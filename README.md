@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This plugin is intentionally add lags during video rendering.
+This plugin intentionally add lags during video rendering.
 
 ## Properties
 
