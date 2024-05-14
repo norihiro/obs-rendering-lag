@@ -27,7 +27,7 @@ extern struct obs_source_info rendering_lag_info;
 
 bool obs_module_load(void)
 {
-	blog(LOG_INFO, "plugin loaded successfully (version %s)", PLUGIN_VERSION);
+	blog(LOG_INFO, "plugin loaded (version %s)", PLUGIN_VERSION);
 	obs_register_source(&rendering_lag_info);
 	return true;
 }
