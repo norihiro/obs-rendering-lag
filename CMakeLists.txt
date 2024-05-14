@@ -13,6 +13,8 @@ set(PLUGIN_AUTHOR "Norihiro Kamae")
 # (used both in the installer and when submitting the installer for notarization)
 set(MACOS_BUNDLEID "net.nagater.obs-rendering-lag")
 
+set(PLUGIN_URL "https://obsproject.com/forum/resources/rendering-lag-plugin.1365/")
+
 # Replace `me@contoso.com` with the maintainer email address you want to put in Linux packages
 set(LINUX_MAINTAINER_EMAIL "norihiro@nagater.net")
 
