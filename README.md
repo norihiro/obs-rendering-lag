@@ -1,4 +1,4 @@
-# OBS Rendering Lag Plugin
+# Rendering Lag Plugin for OBS Studio
 
 ## Introduction
 
